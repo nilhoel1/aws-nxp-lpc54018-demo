@@ -1,0 +1,7 @@
+ExitOnError 1
+r
+h
+loadfile "/home/nils/Documents/RTOS/aws-nxp-lpc54018-demo/NXP/Debug/aws-nxp-lpc54018-freertos.hex"
+qc
+
+qc

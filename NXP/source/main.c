@@ -210,7 +210,7 @@ static void prvMainTask(void *pvParameters)
 
 static void prvMainInit(void)
 {
-    vFlashReadWifiSetup();
+    //vFlashReadWifiSetup();
 
     vInitShell();
 
@@ -246,6 +246,10 @@ int main(void)
     BOARD_InitPins();
     BOARD_BootClockFROHF96M();
 
+#if configUSE_TRACE_FACILITY == 1
+    vTraceEnable(TRC_START); // Tracelyzer
+#endif
+
 #if (defined USB_DEVICE_CONFIG_LPCIP3511HS) && (USB_DEVICE_CONFIG_LPCIP3511HS)
     POWER_DisablePD(kPDRUNCFG_PD_USB1_PHY);
     /* enable usb1 host clock */
@@ -267,6 +271,7 @@ int main(void)
 
     BOARD_InitDebugConsole();
     BOARD_InitLED();
+
 
     prvMainInit();
 

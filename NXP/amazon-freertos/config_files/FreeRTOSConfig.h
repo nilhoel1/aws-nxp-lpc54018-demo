@@ -60,7 +60,7 @@
 #define configMINIMAL_STACK_SIZE                     ( ( uint16_t ) 90 )
 #define configTOTAL_HEAP_SIZE                        ( ( size_t ) ( 85 * 1024 ) )    /* 85 Kbytes. */
 #define configMAX_TASK_NAME_LEN                      ( 16 )
-#define configUSE_TRACE_FACILITY                     1
+#define configUSE_TRACE_FACILITY                     1	/* Tracelyzer ON*/
 #define configUSE_16_BIT_TICKS                       0
 #define configIDLE_SHOULD_YIELD                      1
 #define configUSE_MUTEXES                            1
@@ -132,10 +132,12 @@
     }
 
 /* Map the FreeRTOS printf() to the logging task printf. */
-#define configPRINTF( x )        vLoggingPrintf x
+//#define configPRINTF( x )        vLoggingPrintf x
+#define configPRINTF( x )        vTraceConsoleChannelPrintF x
 
 /* Map the logging task's printf to the board specific output function. */
-#define configPRINT_STRING    DbgConsole_Printf
+//#define configPRINT_STRING    DbgConsole_Printf
+#define configPRINT_STRING    vTraceConsoleChannelPrintF
 
 /* Sets the length of the buffers into which logging messages are written - so
  * also defines the maximum length of each log message. */
@@ -199,5 +201,8 @@
 	 * unexpected behaviour, such as calls to malloc(). */
 	#define configRAND32()    iMainRand32()
 #endif
+
+/* For using percepio Tracealyzer*/
+#include "../TraceRecorder/include/trcRecorder.h"
 
 #endif /* FREERTOS_CONFIG_H */
